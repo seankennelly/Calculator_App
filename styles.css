@@ -8,11 +8,11 @@
 
 body {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  min-width: 500px;
   margin: 0;
-  padding: 2rem;
   background: linear-gradient(to right, #2C2C54, #A40E4C);
 }
 
@@ -20,14 +20,13 @@ body {
   display: grid;
   justify-content: center;
   align-content: center;
-  /* min-height: 60vh; */
-  grid-template-columns: repeat(4, 80px);
-  grid-template-rows: minmax(100px, auto) repeat(5, 80px);
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: minmax(120px, auto) repeat(5, 100px);
 }
 
 .calculator-grid>button {
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 2rem;
   border: 1px solid white;
   outline: none;
   background-color: rgba(255, 255, 255, .75);
@@ -57,16 +56,12 @@ body {
 
 .output .previous-operand {
   color: rgba(255, 255, 255, 0.75);
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .output .current-operand {
   color: white;
-  font-size: 2rem;
-}
-
-.user-guide {
-  display: flex;
+  font-size: 2.5rem;
 }
 
 .user-guide img {
@@ -85,21 +80,19 @@ body {
 
 .guide-reveal {
   position: absolute;
-  top: 40%;
-  right: 34%;
+  top: 33%;
+  left: 38%;
   width: 300px;
   margin: 0 auto 0;
   padding: 0.5rem 1rem;
   background-color: rgb(255, 255, 255);
   border: 1px solid black;
   opacity: 0;
-  visibility: hidden;
 }
 
 .user-guide img:hover+.guide-reveal {
   transition: opacity 0.5s ease-out;
   opacity: 1;
-  visibility: visible;
 }
 
 .guide-reveal span {
@@ -107,4 +100,14 @@ body {
   color: white;
   background-color: black;
   padding: 0 0.2rem;
+}
+
+@media(max-width: 767px) {
+  body {
+    flex-direction: column;
+  }
+
+  .guide-reveal {
+    left: 20%;
+  }
 }

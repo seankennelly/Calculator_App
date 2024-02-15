@@ -35,7 +35,6 @@ class Calculator {
     const prev = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
     if (isNaN(prev) || isNaN(current)) return;
-    console.log('operation: ' + this.operation); // Remove
     switch (this.operation) {
       case '+':
         computation = prev + current;
@@ -65,7 +64,6 @@ class Calculator {
 
   getDisplayNumber(number) {
     const stringNumber = number.toString();
-    console.log("string number: " + stringNumber); // Remove
     const integerDigits = parseFloat(stringNumber.split('.')[0]);
     const decimalDigits = stringNumber.split('.')[1];
     let integerDisplay;
@@ -77,7 +75,6 @@ class Calculator {
     if (decimalDigits != null) {
       return `${integerDisplay}.${decimalDigits}`
     } else {
-      console.log('integer display:' + integerDisplay); // Remove
       return integerDisplay;
     };
   };
@@ -106,9 +103,7 @@ const currentOperandTextElement = document.querySelector('[data-current-operand]
 // Keyboard support
 const numCheck = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
 const operationArray = ['+', '-', '*', '/'];
-
 window.addEventListener('keydown', function (e) {
-  console.log('key: ' + e.key);
   if (e.key === 'Enter') {
     e.preventDefault();
     calculator.operate();
@@ -131,14 +126,10 @@ window.addEventListener('keydown', function (e) {
     let keyboardOperation = e.key;
     if (keyboardOperation == '/') { keyboardOperation = '÷' };
     if (keyboardOperation == '*') { keyboardOperation = 'x' };
-    console.log("Your keyboard operation was " + keyboardOperation); // Remove
     calculator.chooseOperation(keyboardOperation);
     calculator.updateDisplay();
   };
 });
-
-
-
 
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
