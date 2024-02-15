@@ -21,8 +21,8 @@ class Calculator {
   };
 
   chooseOperation(operation) {
-    if(this.currentOperand === '') return;
-    if(this.previousOperand !== '') {
+    if (this.currentOperand === '') return;
+    if (this.previousOperand !== '') {
       this.operate()
     };
     this.operation = operation;
@@ -35,6 +35,7 @@ class Calculator {
     const prev = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
     if (isNaN(prev) || isNaN(current)) return;
+    console.log('operation: ' + this.operation); // Remove
     switch (this.operation) {
       case '+':
         computation = prev + current;
@@ -46,11 +47,17 @@ class Calculator {
         computation = prev * current;
         break;
       case '÷':
-        computation = prev / current;
-        break;
+        if (prev === 0 && current === 0) {
+          alert("By attemping to divide zero by zero you have created a black hole which will unstitch the fabric of the universe. Nice one.");
+          this.clear();
+        } else {
+          computation = prev / current;
+          break;
+        }
       default:
         return
     };
+    computation = parseFloat(computation.toFixed(10));
     this.currentOperand = computation;
     this.operation = undefined;
     this.previousOperand = '';
@@ -58,31 +65,32 @@ class Calculator {
 
   getDisplayNumber(number) {
     const stringNumber = number.toString();
+    console.log("string number: " + stringNumber); // Remove
     const integerDigits = parseFloat(stringNumber.split('.')[0]);
     const decimalDigits = stringNumber.split('.')[1];
     let integerDisplay;
     if (isNaN(integerDigits)) {
       integerDisplay = '';
     } else {
-      integerDisplay = integerDigits.toLocaleString('en', {maximumFractionDigits: 0 })
+      integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
     };
-    if(decimalDigits != null) {
+    if (decimalDigits != null) {
       return `${integerDisplay}.${decimalDigits}`
     } else {
+      console.log('integer display:' + integerDisplay); // Remove
       return integerDisplay;
     };
   };
 
   updateDisplay() {
     this.currentOperandTextElement.innerText =
-      this.getDisplayNumber(this.currentOperand)
+      this.getDisplayNumber(this.currentOperand);
     if (this.operation != null) {
       this.previousOperandTextElement.innerText =
         `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
     } else {
       this.previousOperandTextElement.innerText = ''
     };
-    // if(this.currentOperandTextElement.toString().length < 5) return;
   }
 };
 
@@ -94,6 +102,44 @@ const deleteButton = document.querySelector('[data-delete]');
 const allClearButton = document.querySelector('[data-all-clear]');
 const previousOperandTextElement = document.querySelector('[data-previous-operand]');
 const currentOperandTextElement = document.querySelector('[data-current-operand]');
+
+// Keyboard support
+const numCheck = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.'];
+const operationArray = ['+', '-', '*', '/'];
+
+window.addEventListener('keydown', function (e) {
+  console.log('key: ' + e.key);
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    calculator.operate();
+    calculator.updateDisplay();
+
+  } else if (e.key === 'Backspace') {
+    e.preventDefault();
+    calculator.delete();
+    calculator.updateDisplay();
+
+  } else if (e.key === ' ') {
+    calculator.clear();
+    calculator.updateDisplay();
+
+  } else if (numCheck.includes(e.key)) {
+    calculator.appendNumber(e.key);
+    calculator.updateDisplay();
+
+  } else if (operationArray.includes(e.key)) {
+    let keyboardOperation = e.key;
+    if (keyboardOperation == '/') { keyboardOperation = '÷' };
+    if (keyboardOperation == '*') { keyboardOperation = 'x' };
+    console.log("Your keyboard operation was " + keyboardOperation); // Remove
+    calculator.chooseOperation(keyboardOperation);
+    calculator.updateDisplay();
+  };
+});
+
+
+
+
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
 

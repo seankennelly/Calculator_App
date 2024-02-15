@@ -1,35 +1,41 @@
-* , *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   font-family: 'M PLUS Code Latin', monospace;
   font-weight: normal;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 0;
-  padding: 0;
+  padding: 2rem;
   background: linear-gradient(to right, #2C2C54, #A40E4C);
 }
 
-.calculator-grid  {
+.calculator-grid {
   display: grid;
   justify-content: center;
   align-content: center;
-  min-height: 100vh;
-  grid-template-columns: repeat(4, 100px);
-  grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+  /* min-height: 60vh; */
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: minmax(100px, auto) repeat(5, 80px);
 }
 
-.calculator-grid > button {
+.calculator-grid>button {
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border: 1px solid white;
   outline: none;
-  background-color: rgba(255,255,255, .75);
+  background-color: rgba(255, 255, 255, .75);
   padding: 0;
 }
 
-.calculator-grid > button:hover {
-  background-color: rgba(255,255,255, .90);
+.calculator-grid>button:hover {
+  background-color: rgba(255, 255, 255, .90);
 }
 
 .span-two {
@@ -50,11 +56,55 @@ body {
 }
 
 .output .previous-operand {
-  color: rgba(255,255,255, 0.75);
-  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
 }
 
 .output .current-operand {
   color: white;
-  font-size: 2.5rem;
+  font-size: 2rem;
+}
+
+.user-guide {
+  display: flex;
+}
+
+.user-guide img {
+  position: relative;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 50%;
+  border: 1px solid grey;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.user-guide img:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.guide-reveal {
+  position: absolute;
+  top: 40%;
+  right: 34%;
+  width: 300px;
+  margin: 0 auto 0;
+  padding: 0.5rem 1rem;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.user-guide img:hover+.guide-reveal {
+  transition: opacity 0.5s ease-out;
+  opacity: 1;
+  visibility: visible;
+}
+
+.guide-reveal span {
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
+  background-color: black;
+  padding: 0 0.2rem;
 }

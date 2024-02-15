@@ -9,12 +9,31 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Code+Latin:wght@100;200;300;400;500;600;700&display=swap"
     rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
   <title>Calculator</title>
 </head>
 
 <body>
+    <div class="user-guide">
+      <img src="./images/hand-index.svg"
+        alt="An icon of a hand, representing the fact you can hover here to reveal information">
+      <div class="guide-reveal">
+        <p>
+          If you prefer to use the calculator with your keyboard, please note:
+        </p>
+        <ul>
+          <li><span>Enter</span> for 'equals'</li>
+          <li><span>Backspace</span> for DEL</li>
+          <li><span>Spacebar</span> for AC</li>
+          <li><span>/</span> to divide</li>
+          <li><span>*</span> to multiply</li>
+        </ul>
+      </div>
+    </div>
   <div class="calculator-grid">
     <div class="output">
       <div data-previous-operand class="previous-operand"></div>
