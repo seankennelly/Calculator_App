@@ -1,5 +1,5 @@
 # Calculator Web App
-https://seankennelly.github.io/kreativstorm_calculator/
+https://seankennelly.github.io/Calculator_App/
 
 ## Build
 This app was built with HTML, CSS and Javascript.
